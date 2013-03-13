@@ -1,4 +1,4 @@
-New_Hampshire
-=============
+New Hampshire
+========
 
-Scripts associated with New Hampshire growth model calculations
+SGP source code and documentation associated with New Hampshire SGP analyses
