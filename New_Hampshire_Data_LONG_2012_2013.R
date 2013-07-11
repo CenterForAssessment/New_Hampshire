@@ -59,7 +59,7 @@ New_Hampshire_Data_LONG_2012_2013$FREE_REDUCED_LUNCH_STATUS <- droplevels(New_Ha
 levels(New_Hampshire_Data_LONG_2012_2013$FREE_REDUCED_LUNCH_STATUS) <- c("Economically Disadvantaged (SES)", "Not Economically Disadvantaged (Non-SES)")
 New_Hampshire_Data_LONG_2012_2013$SCALE_SCORE <- as.numeric(New_Hampshire_Data_LONG_2012_2013$SCALE_SCORE)
 New_Hampshire_Data_LONG_2012_2013$ACHIEVEMENT_LEVEL <- factor(New_Hampshire_Data_LONG_2012_2013$ACHIEVEMENT, levels=1:4, 
-	labels=c("Substantially Below Proficient", "Partially Proficient", "Proficient", "Proficient with Distinction"))
+	labels=c("Substantially Below Proficient", "Partially Proficient", "Proficient", "Proficient with Distinction"), ordered=TRUE)
 New_Hampshire_Data_LONG_2012_2013$TEST_STATUS <- NULL
 New_Hampshire_Data_LONG_2012_2013$STATE_ENROLLMENT_STATUS <- factor(New_Hampshire_Data_LONG_2012_2013$STATE_ENROLLMENT_STATUS, levels=1:2, labels=c("Enrolled State: Yes", "Enrolled State: No"))
 New_Hampshire_Data_LONG_2012_2013$DISTRICT_ENROLLMENT_STATUS <- factor(1, levels=1:2, labels=c("Enrolled District: No", "Enrolled District: Yes"))
@@ -104,7 +104,7 @@ New_Hampshire_Data_LONG_2012_2013$InvalidSessions <- NULL
 ### Convert back to data.frame and Save output
 
 New_Hampshire_Data_LONG_2012_2013 <- as.data.frame(New_Hampshire_Data_LONG_2012_2013)
-save(New_Hampshire_Data_LONG_2012_2013, file="Data/New_Hampshire_Data_LONG_2012_2013.Rdata")
+#save(New_Hampshire_Data_LONG_2012_2013, file="Data/New_Hampshire_Data_LONG_2012_2013.Rdata")
 
 
 ###################################################################################
@@ -113,65 +113,65 @@ save(New_Hampshire_Data_LONG_2012_2013, file="Data/New_Hampshire_Data_LONG_2012_
 ###################################################################################
 ###################################################################################
 
-### Load Data
-
-load("Data/New_Hampshire_SGP.Rdata")
-
-levels(New_Hampshire_SGP@Data$IEP_STATUS) <- c("Students with Disabilities-SWD", "Students without Disabilities")
-levels(New_Hampshire_SGP@Data$FREE_REDUCED_LUNCH_STATUS) <- c("Economically Disadvantaged-EconDis", "Not Economically Disadvantaged")
-levels(New_Hampshire_SGP@Data$ELL_STATUS) <- c("Non-English Language Learners", "English Learners-EL w/Comp >= 4.0")
-levels(New_Hampshire_SGP@Data$STUDENT_GROUP) <- c("English Learners-EL w/Comp >= 4.0", "SWD not EL", "EconDis not EL not SWD", "All Other-Not EL, Not SWD, Not EconDis")
+levels(New_Hampshire_Data_LONG_2012_2013$IEP_STATUS) <- c("Students with Disabilities-SWD", "Students without Disabilities")
+levels(New_Hampshire_Data_LONG_2012_2013$FREE_REDUCED_LUNCH_STATUS) <- c("Economically Disadvantaged-EconDis", "Not Economically Disadvantaged")
+levels(New_Hampshire_Data_LONG_2012_2013$ELL_STATUS) <- c("Non-English Language Learners", "English Learners-EL w/Comp >= 4.0")
+levels(New_Hampshire_Data_LONG_2012_2013$STUDENT_GROUP) <- c("English Learners-EL w/Comp >= 4.0", "SWD not EL", "EconDis not EL not SWD", "All Other-Not EL, Not SWD, Not EconDis")
 
 
 tmp.waiver.subgroups <- c("Student with Disability–SWD only", "English Learner–EL only", "Econ Disadvantaged–EconDis only", "SWD and EL-Not EconDis", "EconDis and EL-Not SWD",
 	"SWD and EconDis-Not EL", "SWD and EconDis and EL")
 
-New_Hampshire_SGP@Data$ESEA_WAIVER_SUBGROUPS <- as.character(NA)
+New_Hampshire_Data_LONG_2012_2013$ESEA_WAIVER_SUBGROUPS <- as.character(NA)
 
-tmp.tf <- New_Hampshire_SGP@Data$IEP_STATUS=="Students with Disabilities-SWD" & 
-	!New_Hampshire_SGP@Data$ELL_STATUS=="English Learners-EL w/Comp >= 4.0" & 
-	!New_Hampshire_SGP@Data$FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged-EconDis"
+tmp.tf <- New_Hampshire_Data_LONG_2012_2013$IEP_STATUS=="Students with Disabilities-SWD" & 
+	!New_Hampshire_Data_LONG_2012_2013$ELL_STATUS=="English Learners-EL w/Comp >= 4.0" & 
+	!New_Hampshire_Data_LONG_2012_2013$FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged-EconDis"
 
-New_Hampshire_SGP@Data$ESEA_WAIVER_SUBGROUPS[tmp.tf] <- tmp.waiver.subgroups[1] 
+New_Hampshire_Data_LONG_2012_2013$ESEA_WAIVER_SUBGROUPS[tmp.tf] <- tmp.waiver.subgroups[1] 
 
-tmp.tf <- !New_Hampshire_SGP@Data$IEP_STATUS=="Students with Disabilities-SWD" & 
-	New_Hampshire_SGP@Data$ELL_STATUS=="English Learners-EL w/Comp >= 4.0" & 
-	!New_Hampshire_SGP@Data$FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged-EconDis"
+tmp.tf <- !New_Hampshire_Data_LONG_2012_2013$IEP_STATUS=="Students with Disabilities-SWD" & 
+	New_Hampshire_Data_LONG_2012_2013$ELL_STATUS=="English Learners-EL w/Comp >= 4.0" & 
+	!New_Hampshire_Data_LONG_2012_2013$FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged-EconDis"
 
-New_Hampshire_SGP@Data$ESEA_WAIVER_SUBGROUPS[tmp.tf] <- tmp.waiver.subgroups[2]
+New_Hampshire_Data_LONG_2012_2013$ESEA_WAIVER_SUBGROUPS[tmp.tf] <- tmp.waiver.subgroups[2]
 
-tmp.tf <- !New_Hampshire_SGP@Data$IEP_STATUS=="Students with Disabilities-SWD" & 
-	!New_Hampshire_SGP@Data$ELL_STATUS=="English Learners-EL w/Comp >= 4.0" & 
-	New_Hampshire_SGP@Data$FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged-EconDis"
+tmp.tf <- !New_Hampshire_Data_LONG_2012_2013$IEP_STATUS=="Students with Disabilities-SWD" & 
+	!New_Hampshire_Data_LONG_2012_2013$ELL_STATUS=="English Learners-EL w/Comp >= 4.0" & 
+	New_Hampshire_Data_LONG_2012_2013$FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged-EconDis"
 
-New_Hampshire_SGP@Data$ESEA_WAIVER_SUBGROUPS[tmp.tf] <- tmp.waiver.subgroups[3]
+New_Hampshire_Data_LONG_2012_2013$ESEA_WAIVER_SUBGROUPS[tmp.tf] <- tmp.waiver.subgroups[3]
 
-tmp.tf <- New_Hampshire_SGP@Data$IEP_STATUS=="Students with Disabilities-SWD" & 
-	New_Hampshire_SGP@Data$ELL_STATUS=="English Learners-EL w/Comp >= 4.0" & 
-	!New_Hampshire_SGP@Data$FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged-EconDis"
+tmp.tf <- New_Hampshire_Data_LONG_2012_2013$IEP_STATUS=="Students with Disabilities-SWD" & 
+	New_Hampshire_Data_LONG_2012_2013$ELL_STATUS=="English Learners-EL w/Comp >= 4.0" & 
+	!New_Hampshire_Data_LONG_2012_2013$FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged-EconDis"
 
-New_Hampshire_SGP@Data$ESEA_WAIVER_SUBGROUPS[tmp.tf] <- tmp.waiver.subgroups[4]
+New_Hampshire_Data_LONG_2012_2013$ESEA_WAIVER_SUBGROUPS[tmp.tf] <- tmp.waiver.subgroups[4]
 
-tmp.tf <- !New_Hampshire_SGP@Data$IEP_STATUS=="Students with Disabilities-SWD" & 
-	New_Hampshire_SGP@Data$ELL_STATUS=="English Learners-EL w/Comp >= 4.0" & 
-	New_Hampshire_SGP@Data$FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged-EconDis"
+tmp.tf <- !New_Hampshire_Data_LONG_2012_2013$IEP_STATUS=="Students with Disabilities-SWD" & 
+	New_Hampshire_Data_LONG_2012_2013$ELL_STATUS=="English Learners-EL w/Comp >= 4.0" & 
+	New_Hampshire_Data_LONG_2012_2013$FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged-EconDis"
 
-New_Hampshire_SGP@Data$ESEA_WAIVER_SUBGROUPS[tmp.tf] <- tmp.waiver.subgroups[5]
+New_Hampshire_Data_LONG_2012_2013$ESEA_WAIVER_SUBGROUPS[tmp.tf] <- tmp.waiver.subgroups[5]
 
-tmp.tf <- New_Hampshire_SGP@Data$IEP_STATUS=="Students with Disabilities-SWD" & 
-	!New_Hampshire_SGP@Data$ELL_STATUS=="English Learners-EL w/Comp >= 4.0" & 
-	New_Hampshire_SGP@Data$FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged-EconDis"
+tmp.tf <- New_Hampshire_Data_LONG_2012_2013$IEP_STATUS=="Students with Disabilities-SWD" & 
+	!New_Hampshire_Data_LONG_2012_2013$ELL_STATUS=="English Learners-EL w/Comp >= 4.0" & 
+	New_Hampshire_Data_LONG_2012_2013$FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged-EconDis"
 
-New_Hampshire_SGP@Data$ESEA_WAIVER_SUBGROUPS[tmp.tf] <- tmp.waiver.subgroups[6]
+New_Hampshire_Data_LONG_2012_2013$ESEA_WAIVER_SUBGROUPS[tmp.tf] <- tmp.waiver.subgroups[6]
 
-tmp.tf <- New_Hampshire_SGP@Data$IEP_STATUS=="Students with Disabilities-SWD" & 
-	New_Hampshire_SGP@Data$ELL_STATUS=="English Learners-EL w/Comp >= 4.0" & 
-	New_Hampshire_SGP@Data$FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged-EconDis"
+tmp.tf <- New_Hampshire_Data_LONG_2012_2013$IEP_STATUS=="Students with Disabilities-SWD" & 
+	New_Hampshire_Data_LONG_2012_2013$ELL_STATUS=="English Learners-EL w/Comp >= 4.0" & 
+	New_Hampshire_Data_LONG_2012_2013$FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged-EconDis"
 
-New_Hampshire_SGP@Data$ESEA_WAIVER_SUBGROUPS[tmp.tf] <- tmp.waiver.subgroups[7]
+New_Hampshire_Data_LONG_2012_2013$ESEA_WAIVER_SUBGROUPS[tmp.tf] <- tmp.waiver.subgroups[7]
 
-New_Hampshire_SGP@Data$ESEA_WAIVER_SUBGROUPS <- as.factor(New_Hampshire_SGP@Data$ESEA_WAIVER_SUBGROUPS)
-New_Hampshire_SGP@Data$ESEA_WAIVER_SUBGROUPS <- droplevels(New_Hampshire_SGP@Data$ESEA_WAIVER_SUBGROUPS)
+New_Hampshire_Data_LONG_2012_2013$ESEA_WAIVER_SUBGROUPS <- as.factor(New_Hampshire_Data_LONG_2012_2013$ESEA_WAIVER_SUBGROUPS)
+New_Hampshire_Data_LONG_2012_2013$ESEA_WAIVER_SUBGROUPS <- droplevels(New_Hampshire_Data_LONG_2012_2013$ESEA_WAIVER_SUBGROUPS)
 
 
-save(New_Hampshire_SGP, file="Data/New_Hampshire_SGP.Rdata")
+### Convert back to data.frame and Save output
+
+New_Hampshire_Data_LONG_2012_2013 <- as.data.frame(New_Hampshire_Data_LONG_2012_2013)
+save(New_Hampshire_Data_LONG_2012_2013, file="Data/New_Hampshire_Data_LONG_2012_2013.Rdata")
+
