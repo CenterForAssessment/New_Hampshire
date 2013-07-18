@@ -61,9 +61,9 @@ New_Hampshire_Data_LONG_2012_2013$SCALE_SCORE <- as.numeric(New_Hampshire_Data_L
 New_Hampshire_Data_LONG_2012_2013$ACHIEVEMENT_LEVEL <- factor(New_Hampshire_Data_LONG_2012_2013$ACHIEVEMENT, levels=1:4, 
 	labels=c("Substantially Below Proficient", "Partially Proficient", "Proficient", "Proficient with Distinction"), ordered=TRUE)
 New_Hampshire_Data_LONG_2012_2013$TEST_STATUS <- NULL
-New_Hampshire_Data_LONG_2012_2013$STATE_ENROLLMENT_STATUS <- factor(New_Hampshire_Data_LONG_2012_2013$STATE_ENROLLMENT_STATUS, levels=1:2, labels=c("Enrolled State: Yes", "Enrolled State: No"))
-New_Hampshire_Data_LONG_2012_2013$DISTRICT_ENROLLMENT_STATUS <- factor(1, levels=1:2, labels=c("Enrolled District: No", "Enrolled District: Yes"))
-New_Hampshire_Data_LONG_2012_2013$SCHOOL_ENROLLMENT_STATUS <- factor(1, levels=1:2, labels=c("Enrolled School: No", "Enrolled School: Yes"))
+New_Hampshire_Data_LONG_2012_2013$STATE_ENROLLMENT_STATUS <- factor(New_Hampshire_Data_LONG_2012_2013$STATE_ENROLLMENT_STATUS, levels=0:1, labels=c("Enrolled State: No", "Enrolled State: Yes"))
+levels(New_Hampshire_Data_LONG_2012_2013$DISTRICT_ENROLLMENT_STATUS) <- c("Enrolled District: No", "Enrolled District: Yes")
+levels(New_Hampshire_Data_LONG_2012_2013$SCHOOL_ENROLLMENT_STATUS) <- c("Enrolled School: No", "Enrolled School: Yes")
 New_Hampshire_Data_LONG_2012_2013$EMH_LEVEL[New_Hampshire_Data_LONG_2012_2013$EMH_LEVEL==""] <- NA
 New_Hampshire_Data_LONG_2012_2013$EMH_LEVEL <- factor(New_Hampshire_Data_LONG_2012_2013$EMH_LEVEL)
 levels(New_Hampshire_Data_LONG_2012_2013$EMH_LEVEL) <- c("Elementary", "High", "Middle")
@@ -174,4 +174,3 @@ New_Hampshire_Data_LONG_2012_2013$ESEA_WAIVER_SUBGROUPS <- droplevels(New_Hampsh
 
 New_Hampshire_Data_LONG_2012_2013 <- as.data.frame(New_Hampshire_Data_LONG_2012_2013)
 save(New_Hampshire_Data_LONG_2012_2013, file="Data/New_Hampshire_Data_LONG_2012_2013.Rdata")
-
