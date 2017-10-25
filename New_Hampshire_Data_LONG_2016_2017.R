@@ -85,6 +85,9 @@ New_Hampshire_Data_LONG_2016_2017[,InvalidSessions:=NULL]
 
 New_Hampshire_Data_LONG_2016_2017[,VALID_CASE:="VALID_CASE"]
 New_Hampshire_Data_LONG_2016_2017[GRADE==11, VALID_CASE:="INVALID_CASE"]
+setkey(New_Hampshire_Data_LONG_2016_2017, VALID_CASE, CONTENT_AREA, YEAR, ID, SCALE_SCORE)
+setkey(New_Hampshire_Data_LONG_2016_2017, VALID_CASE, CONTENT_AREA, YEAR, ID)
+New_Hampshire_Data_LONG_2016_2017[which(duplicated(New_Hampshire_Data_LONG_2016_2017, by=key(New_Hampshire_Data_LONG_2016_2017)))-1, VALID_CASE:="INVALID_CASE"]
 
 
 ### Save output
