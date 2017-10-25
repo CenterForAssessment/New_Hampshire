@@ -66,7 +66,9 @@ New_Hampshire_Data_LONG_2016_2017[,SCHOOL_ENROLLMENT_STATUS:=factor(SCHOOL_ENROL
 setattr(New_Hampshire_Data_LONG_2016_2017$SCHOOL_ENROLLMENT_STATUS, "levels", c("Enrolled School: No", "Enrolled School: Yes"))
 
 New_Hampshire_Data_LONG_2016_2017[,EMH_LEVEL:=factor(EMH_LEVEL)]
-setattr(New_Hampshire_Data_LONG_2016_2017$EMH_LEVEL, "levels", c("Elementary", "High", "Middle"))
+setattr(New_Hampshire_Data_LONG_2016_2017$EMH_LEVEL, "levels", c("", "Elementary", "High", "Middle"))
+New_Hampshire_Data_LONG_2016_2017[,EMH_LEVEL:=as.character(EMH_LEVEL)]
+
 
 New_Hampshire_Data_LONG_2016_2017[,GENDER:=factor(GENDER)]
 
