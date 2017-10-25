@@ -26,12 +26,8 @@ New_Hampshire_Data_LONG_2016_2017[,CONTENT_AREA:=as.character(CONTENT_AREA)]
 
 New_Hampshire_Data_LONG_2016_2017[,YEAR:="2016_2017"]
 
-#New_Hampshire_Data_LONG_2016_2017[,DISTRICT_NAME:=factor(DISTRICT_NAME)]
-
 New_Hampshire_Data_LONG_2016_2017[,DISTRICT_NUMBER_TESTING_YEAR:=NULL]
 New_Hampshire_Data_LONG_2016_2017[,DISTRICT_NAME_TESTING_YEAR:=NULL]
-
-#New_Hampshire_Data_LONG_2016_2017[,SCHOOL_NAME:=factor(SCHOOL_NAME)]
 
 New_Hampshire_Data_LONG_2016_2017[,SCHOOL_NUMBER_TESTING_YEAR:=NULL]
 New_Hampshire_Data_LONG_2016_2017[,SCHOOL_NAME_TESTING_YEAR:=NULL]
@@ -45,7 +41,9 @@ New_Hampshire_Data_LONG_2016_2017[,ELL_MULTI_CATEGORY_STATUS:=ELL_STATUS]
 New_Hampshire_Data_LONG_2016_2017[,ELL_STATUS:=NULL]
 
 New_Hampshire_Data_LONG_2016_2017[,ELL_STATUS:=factor(1, levels=1:2, labels=c("Non-English Language Learners (Non-EL)", "English Language Learners (EL) with Composite >= 4.0"))]
+New_Hampshire_Data_LONG_2016_2017[,ELL_STATUS:=as.character(ELL_STATUS)]
 New_Hampshire_Data_LONG_2016_2017[ELL_MULTI_CATEGORY_STATUS != "Not ELL", ELL_STATUS:="English Language Learners (EL) with Composite >= 4.0"]
+New_Hampshire_Data_LONG_2016_2017[,ELL_MULTI_CATEGORY_STATUS:=as.character(ELL_MULTI_CATEGORY_STATUS)]
 
 New_Hampshire_Data_LONG_2016_2017[,IEP_STATUS:=factor(IEP_STATUS)]
 setattr(New_Hampshire_Data_LONG_2016_2017$IEP_STATUS, "levels", my.iep.labels)
@@ -77,6 +75,7 @@ New_Hampshire_Data_LONG_2016_2017[,STUDENT_GROUP:=
 New_Hampshire_Data_LONG_2016_2017[ELL_STATUS=="English Language Learners (EL) with Composite >= 4.0", STUDENT_GROUP:="English Language Learners (EL) Group with Composite >= 4.0"]
 New_Hampshire_Data_LONG_2016_2017[ELL_STATUS=="Non-English Language Learners (Non-EL)" & IEP_STATUS=="Students with Disabilities (SWD/IEP)", STUDENT_GROUP:="Students with Disabilities (SWD/IEP) Group (not EL)"]
 New_Hampshire_Data_LONG_2016_2017[ELL_STATUS=="Non-English Language Learners (Non-EL)" & IEP_STATUS=="Students without Disabilities (Non-SWD/IEP)" & FREE_REDUCED_LUNCH_STATUS=="Economically Disadvantaged (SES)", STUDENT_GROUP:="Economically Disadvantaged (SES) Group (not EL or SWD)"]
+New_Hampshire_Data_LONG_2016_2017[,STUDENT_GROUP:=as.character(STUDENT_GROUP)]
 
 New_Hampshire_Data_LONG_2016_2017[,InvalidSessions:=NULL]
 
