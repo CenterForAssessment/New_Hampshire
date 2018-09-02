@@ -17,8 +17,8 @@ load("Data/New_Hampshire_Data_LONG_2015_2016_to_2017_2018.Rdata")
 ### Calculate SGPs
 
 New_Hampshire_SGP <- abcSGP(
-		New_Hampshire_Data_LONG,
-		steps=c("prepareSGP", "analyzeSGP", "combineSGP", "summarizeSGP", "outputSGP")
+		New_Hampshire_Data_LONG_2015_2016_to_2017_2018,
+		steps=c("prepareSGP", "analyzeSGP", "combineSGP", "summarizeSGP", "outputSGP"),
 		sgp.projections=FALSE,
 		sgp.projections.lagged=FALSE,
 		sgp.percentiles.baseline=FALSE,
