@@ -19,12 +19,14 @@ load("Data/New_Hampshire_Data_LONG_2015_2016_to_2017_2018.Rdata")
 New_Hampshire_SGP <- abcSGP(
 		New_Hampshire_Data_LONG_2015_2016_to_2017_2018,
 		steps=c("prepareSGP", "analyzeSGP", "combineSGP", "summarizeSGP", "outputSGP"),
-		sgp.projections=FALSE,
-		sgp.projections.lagged=FALSE,
+		sgp.percentiles=TRUE,
+		sgp.projections=TRUE,
+		sgp.projections.lagged=TRUE,
 		sgp.percentiles.baseline=FALSE,
 		sgp.projections.baseline=FALSE,
 		sgp.projections.lagged.baseline=FALSE,
-		save.intermediate.results=TRUE,
+		sgp.percentiles.equated=TRUE,
+		sgp.target.scale.scores=TRUE,
 		sgPlot.demo.report=TRUE,
 		parallel.config=list(BACKEND="PARALLEL", WORKERS=list(PERCENTILES=5, BASELINE_PERCENTILES=5, PROJECTIONS=5, LAGGED_PROJECTIONS=5, SUMMARY=5, GA_PLOTS=5, SG_PLOTS=1)))
 
