@@ -18,7 +18,7 @@ load("Data/New_Hampshire_Data_LONG_2015_2016_to_2017_2018.Rdata")
 
 New_Hampshire_SGP <- abcSGP(
 		New_Hampshire_Data_LONG_2015_2016_to_2017_2018,
-		steps=c("prepareSGP", "analyzeSGP", "combineSGP", "summarizeSGP", "outputSGP"),
+		steps=c("prepareSGP", "analyzeSGP", "combineSGP", "summarizeSGP", "visualizeSGP", "outputSGP"),
 		sgp.percentiles=TRUE,
 		sgp.projections=TRUE,
 		sgp.projections.lagged=TRUE,
