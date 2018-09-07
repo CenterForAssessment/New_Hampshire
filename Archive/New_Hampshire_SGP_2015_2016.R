@@ -35,7 +35,8 @@ New_Hampshire_Data_LONG <- rbindlist(
 
 New_Hampshire_SGP <- abcSGP(
 			New_Hampshire_Data_LONG,
-			steps=c("prepareSGP", "analyzeSGP", "combineSGP"),
+			years=c("2013_2014", "2014_2015"),
+			steps=c("prepareSGP", "analyzeSGP"),
 			sgp.percentiles=TRUE,
 			sgp.percentiles.equated=TRUE,
 			sgp.projections=FALSE,
