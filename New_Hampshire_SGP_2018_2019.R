@@ -14,7 +14,6 @@ require(SGP)
 load("Data/New_Hampshire_SGP.Rdata")
 load("Data/New_Hampshire_Data_LONG_2018_2019.Rdata")
 
-
 ### Calculate SGPs
 
 New_Hampshire_SGP <- updateSGP(
@@ -35,4 +34,4 @@ New_Hampshire_SGP <- updateSGP(
 
 ### Save results
 
-#save(New_Hampshire_SGP, file="Data/New_Hampshire_SGP.Rdata")
+save(New_Hampshire_SGP, file="Data/New_Hampshire_SGP.Rdata")
