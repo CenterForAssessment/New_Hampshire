@@ -28,7 +28,7 @@ parallel.config <- list(BACKEND="PARALLEL", WORKERS=list(PERCENTILES=4, BASELINE
 ###   Run updateSGP analysis
 #####
 
-New_Hampshire_COVID_SGP <- updateSGP(
+New_Hampshire_SGP <- updateSGP(
         what_sgp_object = New_Hampshire_SGP,
         with_sgp_data_LONG = New_Hampshire_Data_LONG_2021,
         steps = c("prepareSGP", "analyzeSGP", "combineSGP"),
