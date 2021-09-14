@@ -9,8 +9,8 @@ require(SGP)
 require(SGPmatrices)
 
 ###   Load data
-load("Data/New_Hampshire_SGP.Rdata"))
-load("Data/New_Hampshire_Data_LONG_2021.Rdata")
+load("Data/New_Hampshire_SGP.Rdata")
+load("Data/New_Hampshire_Data_LONG_2020_2021.Rdata")
 
 ###   Add Baseline matrices to SGPstateData
 SGPstateData <- addBaselineMatrices("NH", "2020_2021")
@@ -30,7 +30,7 @@ parallel.config <- list(BACKEND="PARALLEL", WORKERS=list(PERCENTILES=4, BASELINE
 
 New_Hampshire_SGP <- updateSGP(
         what_sgp_object = New_Hampshire_SGP,
-        with_sgp_data_LONG = New_Hampshire_Data_LONG_2021,
+        with_sgp_data_LONG = New_Hampshire_Data_LONG_2020_2021,
         steps = c("prepareSGP", "analyzeSGP", "combineSGP"),
         sgp.config = NH_CONFIG,
         sgp.percentiles = TRUE,
@@ -44,4 +44,4 @@ New_Hampshire_SGP <- updateSGP(
 )
 
 ###   Save results
-save(New_Hampshire_SGP, file="New_Hampshire_SGP.Rdata"))
+#save(New_Hampshire_SGP, file="New_Hampshire_SGP.Rdata"))
