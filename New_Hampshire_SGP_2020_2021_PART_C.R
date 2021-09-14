@@ -9,7 +9,7 @@ require(SGP)
 require(SGPmatrices)
 
 ###   Load data
-load("Data/New_Hampshire_SGP.Rdata"))
+load("Data/New_Hampshire_SGP.Rdata")
 
 ###   Load configurations
 source("SGP_CONFIG/2020_2021/PART_C/READING.R")
@@ -85,4 +85,4 @@ New_Hampshire_SGP <- abcSGP(
 
 
 ###  Save results
-save(New_Hampshire_SGP, "Data/New_Hampshire_SGP.Rdata"))
+save(New_Hampshire_SGP, "Data/New_Hampshire_SGP.Rdata")

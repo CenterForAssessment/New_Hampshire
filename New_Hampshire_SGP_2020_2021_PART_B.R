@@ -9,7 +9,7 @@ require(SGP)
 require(SGPmatrices)
 
 ###   Load data
-load("Data/New_Hampshire_SGP.Rdata"))
+load("Data/New_Hampshire_SGP.Rdata")
 
 ###   Load configurations
 source("SGP_CONFIG/2020_2021/PART_B/READING.R")
