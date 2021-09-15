@@ -84,4 +84,4 @@ New_Hampshire_SGP <- abcSGP(
 )
 
 ###   Save results
-#save(New_Hampshire_SGP, file="Data/New_Hampshire_SGP.Rdata")
+save(New_Hampshire_SGP, file="Data/New_Hampshire_SGP.Rdata")

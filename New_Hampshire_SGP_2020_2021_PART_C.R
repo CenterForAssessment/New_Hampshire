@@ -71,7 +71,7 @@ SGPstateData[["NH"]][["SGP_Configuration"]][["max.forward.projection.sequence"]]
 New_Hampshire_SGP <- abcSGP(
         New_Hampshire_SGP,
         steps=c("prepareSGP", "analyzeSGP", "combineSGP", "outputSGP"),
-        sgp.config=MA_CONFIG,
+        sgp.config=NH_CONFIG,
         sgp.percentiles=FALSE,
         sgp.projections=FALSE,
         sgp.projections.lagged=FALSE,
@@ -79,10 +79,9 @@ New_Hampshire_SGP <- abcSGP(
         sgp.projections.baseline=FALSE,
         sgp.projections.lagged.baseline=TRUE,
         sgp.target.scale.scores=TRUE,
-        outputSGP.directory=output.directory,
         parallel.config=parallel.config
 )
 
 
 ###  Save results
-save(New_Hampshire_SGP, "Data/New_Hampshire_SGP.Rdata")
+save(New_Hampshire_SGP, file="Data/New_Hampshire_SGP.Rdata")
