@@ -9,7 +9,8 @@ require(data.table)
 
 
 ### Load base data file
-New_Hampshire_Data_LONG_2020_2021 <- fread("Data/Base_Files/New_Hampshire_Data_LONG_2020_2021.txt", colClasses=rep("character", 31))
+#New_Hampshire_Data_LONG_2020_2021 <- fread("Data/Base_Files/New_Hampshire_Data_LONG_2020_2021.txt", colClasses=rep("character", 31))
+New_Hampshire_Data_LONG_2020_2021 <- fread("Data/Base_Files/New_Hampshire_Data_LONG_2020_2021_with_MISSING.txt", colClasses=rep("character", 31), na.strings=c("", "NA", "NULL"))
 
 my.iep.labels <- c("Students with Disabilities (SWD/IEP)", "Students without Disabilities (Non-SWD/IEP)")
 my.achievement.level.labels <- c("Below Proficient", "Approaching Proficient", "Proficient", "Above Proficient")
@@ -50,8 +51,8 @@ setattr(New_Hampshire_Data_LONG_2020_2021$FREE_REDUCED_LUNCH_STATUS, "levels", c
 
 New_Hampshire_Data_LONG_2020_2021[,SCALE_SCORE:=as.numeric(SCALE_SCORE)]
 
-New_Hampshire_Data_LONG_2020_2021[,ACHIEVEMENT_LEVEL:=paste("Level", ACHIEVEMENT_LEVEL)]
-New_Hampshire_Data_LONG_2020_2021[,ACHIEVEMENT_LEVEL:=factor(ACHIEVEMENT_LEVEL)]
+New_Hampshire_Data_LONG_2020_2021[!is.na(ACHIEVEMENT_LEVEL), ACHIEVEMENT_LEVEL:=paste("Level", ACHIEVEMENT_LEVEL)]
+New_Hampshire_Data_LONG_2020_2021[,ACHIEVEMENT_LEVEL:=as.factor(ACHIEVEMENT_LEVEL)]
 setattr(New_Hampshire_Data_LONG_2020_2021$ACHIEVEMENT_LEVEL, "levels", my.achievement.level.labels)
 New_Hampshire_Data_LONG_2020_2021[,ACHIEVEMENT_LEVEL:=as.character(ACHIEVEMENT_LEVEL)]
 
