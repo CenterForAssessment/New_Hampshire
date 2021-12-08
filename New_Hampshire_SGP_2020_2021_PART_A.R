@@ -43,5 +43,10 @@ New_Hampshire_SGP <- updateSGP(
         parallel.config = parallel.config
 )
 
+### Copy SCALE_SCORE_PRIOR and SCALE_SCORE_PRIOR_STANDARDIZED to BASELINE counterparts
+
+New_Hampshire_SGP@Data[YEAR=="2021", SCALE_SCORE_PRIOR_BASELINE:=SCALE_SCORE_PRIOR]
+New_Hampshire_SGP@Data[YEAR=="2021", SCALE_SCORE_PRIOR_STANDARDIZED_BASELINE:=SCALE_SCORE_PRIOR_STANDARDIZED]
+ 
 ###   Save results
 save(New_Hampshire_SGP, file="Data/New_Hampshire_SGP.Rdata")

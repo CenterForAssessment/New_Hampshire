@@ -15,7 +15,7 @@ New_Hampshire_Data_LONG_2020_2021 <- fread("Data/Base_Files/New_Hampshire_Data_L
 my.iep.labels <- c("Students with Disabilities (SWD/IEP)", "Students without Disabilities (Non-SWD/IEP)")
 my.achievement.level.labels <- c("Below Proficient", "Approaching Proficient", "Proficient", "Above Proficient")
 
-setnames(New_Hampshire_Data_LONG_2020_2021, c("VAID_CASE", "DISNUMBER", "ETHNIC"), c("VALID_CASE", "DISTRICT_NUMBER", "ETHNICITY"))
+setnames(New_Hampshire_Data_LONG_2020_2021, c("VAID_CASE", "DISNUMBER", "ETHNIC", "SCHOOL_NUMBER", "SCHOOL_NUMBER_TESTING_YEAR"), c("VALID_CASE", "DISTRICT_NUMBER", "ETHNICITY", "SCHOOL_NUMBER_TESTING_YEAR", "SCHOOL_NUMBER"))
 
 New_Hampshire_Data_LONG_2020_2021[,CONTENT_AREA:=as.factor(CONTENT_AREA)]
 levels(New_Hampshire_Data_LONG_2020_2021$CONTENT_AREA) <- c("MATHEMATICS", "READING", "SCIENCE")
@@ -87,10 +87,28 @@ New_Hampshire_Data_LONG_2020_2021[,VALID_CASE:="VALID_CASE"]
 New_Hampshire_Data_LONG_2020_2021[GRADE==11|CONTENT_AREA=="SCIENCE", VALID_CASE:="INVALID_CASE"]
 
 
+#######################################################
+###
+### Add in Additional Variable on Virtual Instruction
+###
+#######################################################
+
+Virtual_Instruction_Percentage <- fread("Data/Base_Files/StudentLevelVirtualInstPct.csv")
+setnames(Virtual_Instruction_Percentage, c("YEAR", "ID", "SAUID", "DISTRICT_NUMBER", "SCHOOL_NUMBER", "VIRTUAL_INSTRUCTION_PERCENTAGE"))
+Virtual_Instruction_Percentage[,ID:=as.character(ID)]
+Virtual_Instruction_Percentage[,SCHOOL_NUMBER:=as.character(SCHOOL_NUMBER)]
+Virtual_Instruction_Percentage <- Virtual_Instruction_Percentage[,c("ID", "SCHOOL_NUMBER", "VIRTUAL_INSTRUCTION_PERCENTAGE"), with=FALSE]
+Virtual_Instruction_Percentage[,YEAR:="2020_2021"]
+
+setkey(New_Hampshire_Data_LONG_2020_2021, YEAR, SCHOOL_NUMBER, ID)
+setkey(Virtual_Instruction_Percentage, YEAR, SCHOOL_NUMBER, ID)
+New_Hampshire_Data_LONG_2020_2021 <- Virtual_Instruction_Percentage[New_Hampshire_Data_LONG_2020_2021]
+
+setcolorder(New_Hampshire_Data_LONG_2020_2021, c(1,2,4:24, 3))
+
 ### Setkey
 
 setkey(New_Hampshire_Data_LONG_2020_2021, VALID_CASE, CONTENT_AREA, YEAR, GRADE, ID)
-
 
 ### Save output
 
